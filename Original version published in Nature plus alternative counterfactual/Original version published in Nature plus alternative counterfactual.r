@@ -87,11 +87,13 @@ save(
   file = paste0("results/model-", JOBID, "-stanfit.Rdata")
   )
 
+countries <- gsub("_", " ", countries)
+
 print("Generating mu, rt plots")
 
-mu = (as.matrix(out$mu))
-colnames(mu) = countries
-g = mcmc_intervals(mu, prob = .9)
+mu <- as.matrix(out$mu)
+colnames(mu) <- countries
+g <- mcmc_intervals(mu, prob = .9)
 ggsave(
   sprintf("figures/%s-mu.png", filename),
   g,
@@ -99,10 +101,10 @@ ggsave(
   height = 6
   )
 
-tmp = lapply(1:length(countries), function(i) (out$Rt_adj[, stan_data$N[i],i]))
-Rt_adj = do.call(cbind, tmp)
-colnames(Rt_adj) = countries
-g = mcmc_intervals(Rt_adj, prob = .9)
+tmp <- lapply(1:length(countries), function(i) (out$Rt_adj[, stan_data$N[i],i]))
+Rt_adj <- do.call(cbind, tmp)
+colnames(Rt_adj) <- countries
+g <- mcmc_intervals(Rt_adj, prob = .9)
 ggsave(
   sprintf("figures/%s-final-rt.png", filename),
   g,
@@ -253,7 +255,7 @@ ggplot(country_specific_effects, aes(x = m, y = parameter)) +
   geom_point(size = 2, color = "steelblue") +
   geom_errorbarh(aes(xmin = ll, xmax = hh, height = .2)) +
   theme_bw() +
-  ggtitle(expression(paste("Country-specific effects of the last intervention on ", R[t], " with 95% credibility interval"))) +
+  ggtitle(expression(paste("Country-specific effect of the last intervention on ", R[t], " with 95% credibility interval"))) +
   xlab(expression(paste("Reduction in ", R[t]))) +
   ylab("") +
   scale_x_continuous(

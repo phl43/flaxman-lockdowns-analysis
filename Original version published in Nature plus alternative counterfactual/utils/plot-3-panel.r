@@ -20,6 +20,8 @@ make_three_panel_plot <- function(out, filename){
   print(sprintf("loading: %s",paste0("results/",filename,'-stanfit.Rdata')))
   covariates = readRDS('data/interventions.rds')
   
+  covariates$Country <- gsub("_", " ", covariates$Country)
+  
   for(i in 1:length(countries)){
     print(i)
     N <- length(dates[[i]])
