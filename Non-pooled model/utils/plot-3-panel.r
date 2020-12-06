@@ -18,6 +18,7 @@ source("utils/geom-stepribbon.r")
 make_three_panel_plot <- function(out, filename){
   
   covariates = readRDS('data/interventions.rds')
+  covariates$Country <- gsub("_", " ", covariates$Country)
   
   for(i in 1:length(countries)){
     print(i)

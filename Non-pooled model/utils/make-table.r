@@ -59,9 +59,9 @@ make_table <- function(out, filename){
   cf_infection_overall2 = rep(0,n)
   our_infection_overall = rep(0,n)
   for(i in 1:length(countries)){
-    fit0 = make_data(filename, "Original counterfactual",counterfactual = "0", i, days = 0)
-    fit1 = make_data(filename, "Flaxman et al.'s model",counterfactual = "", i, days= 0)
-    fit2 = make_data(filename, "Alternative counterfactual",counterfactual = "1", i, days = 0)
+    fit0 = make_data(out, filename, "Original counterfactual",counterfactual = "0", i, days = 0)
+    fit1 = make_data(out, filename, "Flaxman et al.'s model",counterfactual = "", i, days= 0)
+    fit2 = make_data(out, filename, "Alternative counterfactual",counterfactual = "1", i, days = 0)
     
     cf_deaths_overall = cf_deaths_overall + rowSums(fit0$estimated_deaths)
     cf_deaths_overall2 = cf_deaths_overall2 + rowSums(fit2$estimated_deaths)

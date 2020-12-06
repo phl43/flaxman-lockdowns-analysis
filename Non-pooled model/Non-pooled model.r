@@ -89,8 +89,8 @@ filename <- paste0("model-", JOBID)
 countries <- gsub("_", " ", countries)
 
 mu <- as.matrix(out$mu)
-colnames(mu) = countries
-g <- mcmc_intervals(mu,prob = .9)
+colnames(mu) <- countries
+g <- mcmc_intervals(mu, prob = .9)
 ggsave(
   sprintf("figures/%s-mu.png", filename),
   g,

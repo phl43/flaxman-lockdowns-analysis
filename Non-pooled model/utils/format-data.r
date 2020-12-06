@@ -12,8 +12,7 @@ library(gridExtra)
 library(ggpubr)
 library(bayesplot)
 library(cowplot)
-make_data = function(filename,label,counterfactual="", i, days=7) {
-  out=rstan::extract(fit)
+make_data = function(out, filename,label,counterfactual="", i, days=7) {
   N <- length(dates[[i]])
   N2 <- N + days
   times_forecast <- dates[[i]][N2]
