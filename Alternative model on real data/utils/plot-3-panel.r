@@ -15,12 +15,10 @@ library(ggplot2)
 
 source("utils/geom-stepribbon.r")
 #---------------------------------------------------------------------------
-make_three_panel_plot <- function(filename){
+make_three_panel_plot <- function(out, filename){
   
-  print(sprintf("loading: %s",paste0("results/",filename,'-stanfit.Rdata')))
-  load(paste0("results/", filename,'-stanfit.Rdata'))
-  out <- rstan::extract(fit)
   covariates = readRDS("data/interventions.rds")
+  covariates$Country <- gsub("_", " ", covariates$Country)
   
   for(i in 1:length(countries)){
     print(i)

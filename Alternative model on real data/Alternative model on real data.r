@@ -59,10 +59,10 @@ fit <- sampling(
   control = list(adapt_delta = 0.95, max_treedepth = 15)
   )
 
-out = rstan::extract(fit)
-prediction = out$prediction
-estimated.deaths = out$E_deaths
-estimated.deaths.cf = out$E_deaths0
+out <- rstan::extract(fit)
+prediction <- out$prediction
+estimated.deaths <- out$E_deaths
+estimated.deaths.cf <- out$E_deaths0
 
 JOBID <- Sys.getenv("PBS_JOBID")
 if(JOBID == "")
@@ -84,6 +84,8 @@ save(
   )
 
 filename <- paste0("model-", JOBID)
+
+countries <- gsub("_", " ", countries)
 
 print("Generating mu, rt plots")
 mu <- as.matrix(out$mu)
@@ -111,4 +113,4 @@ ggsave(
 
 print("Generate 3-panel plots")
 source("utils/plot-3-panel.r")
-make_three_panel_plot(filename)
+make_three_panel_plot(out, filename)
